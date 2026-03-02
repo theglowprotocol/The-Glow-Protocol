@@ -6,66 +6,57 @@
     <title>Deep Glow | 5-Day Reset Protocol</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Ajustes de responsividade para garantir que os grids não quebrem no mobile */
+        @media (max-width: 768px) {
+            .mobile-stack { display: block !important; }
+            .mobile-stack > div { margin-bottom: 20px; }
+            .grid-days { grid-template-columns: 1fr !important; }
+            .offer-grid { grid-template-columns: 1fr !important; }
+            .offer-right { border-left: none !important; border-top: 1px solid #eee; }
+            h1 { font-size: 2rem !important; }
+        }
+        .day-card { text-align: left; padding: 2rem !important; }
+        .day-card h4 { color: var(--midnight); margin-bottom: 10px; }
+        .day-card p { font-size: 0.9rem; line-height: 1.4; color: var(--text-muted); margin: 0; }
+        .tag-bonus { background: var(--gold); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; vertical-align: middle; margin-left: 5px; }
+    </style>
 </head>
 <body>
 
     <header class="section">
         <div class="container text-center">
             <span style="color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Biological Protocol • 5-Night Reset</span>
-            
-            <h1>
-                Look Less Puffy & More Defined <br> 
-                <span style="font-style: italic; font-weight: 400; font-family: serif;">
-                    In Just 5 Days.
-                </span>
-            </h1>
-
-            <p style="margin: 0 auto;">
-                A simple, step-by-step routine designed to reduce puffiness, improve skin tone, and activate your natural glow — without expensive products or complicated routines.
-            </p>
+            <h1>Wake Up with Renewed Skin <br> <span style="font-style: italic; font-weight: 400; font-family: serif;">Fast, Simple, Scientific.</span></h1>
+            <p style="margin: 0 auto; max-width: 600px;">A precision-engineered 5-day protocol to neutralize cortisol and reboot your natural glow. Results in days, not months.</p>
             
             <div class="cta-container">
-                <a href="#offer" class="cta">Start Your 5-Day Reset Now</a>
-                <span class="cta-secondary">Instant Access • Secure Checkout</span>
+                <a href="#offer" class="cta">Start Your Reset Now</a>
+                <span class="cta-secondary">Instant Access • One-Time Payment</span>
             </div>
         </div>
     </header>
 
     <main>
-
         <section class="section section-dark">
             <div class="container">
-                <div class="box section-dark" style="border: 1px dashed rgba(255,255,255,0.1);">
-
-                    <!-- FIX GRID -->
-                    <div class="two-columns mobile-stack" style="align-items: center;">
-                        
+                <div class="box section-dark" style="border: 1px dashed rgba(255,255,255,0.1); padding: 2rem;">
+                    <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;" class="mobile-stack">
                         <div>
                             <span style="color: var(--gold); text-transform: uppercase; font-size: 0.8rem; font-weight: 700;">The Diagnosis</span>
-                            <h2 style="color: white; margin-top: 10px;">
-                                Why You Look <span style="color: var(--gold);">Exhausted</span>
-                            </h2>
+                            <h2 style="color: white; margin-top: 10px;">Why You Look Tired</h2>
                             
                             <div style="margin-top: 25px;">
-                                <p style="font-size: 1rem; margin-bottom: 15px;">
-                                    <strong>✕ Cortisol Imbalance:</strong> Your body stays in stress mode instead of repairing overnight.
-                                </p>
-                                <p style="font-size: 1rem; margin-bottom: 15px;">
-                                    <strong>✕ Fluid Retention:</strong> Why you wake up with puffiness and under-eye swelling.
-                                </p>
-                                <p style="font-size: 1rem;">
-                                    <strong>✕ Skin Barrier Stress:</strong> Even expensive products don’t work properly.
-                                </p>
+                                <p style="font-size: 1rem; margin-bottom: 15px; color: #fff;"><strong>✕ Cortisol Spikes:</strong> Stress blocks your collagen production while you sleep.</p>
+                                <p style="font-size: 1rem; margin-bottom: 15px; color: #fff;"><strong>✕ Stagnant Fluids:</strong> The real cause of morning puffiness and dark circles.</p>
+                                <p style="font-size: 1rem; color: #fff;"><strong>✕ Barrier Stress:</strong> Stressed skin can't absorb even the most expensive serums.</p>
                             </div>
                         </div>
                         
-                        <div class="box" style="background: var(--midnight-light); padding: 2rem;">
-                            <h3 style="color: var(--gold); font-size: 1.25rem; margin-bottom: 1rem;">The Solution</h3>
-                            <p style="font-size: 0.95rem; color: #94A3B8;">
-                                This isn’t complicated. It’s a simple 5-day system that helps your body reduce swelling, rebalance itself, and naturally improve how your skin looks — starting in the first days.
-                            </p>
+                        <div class="box" style="background: var(--midnight-light); padding: 2rem; border: none;">
+                            <h3 style="color: var(--gold); font-size: 1.25rem; margin-bottom: 1rem;">The Rapid Solution</h3>
+                            <p style="font-size: 0.95rem; color: #94A3B8;">This is a <strong>biological override</strong>. We align your circadian rhythm to force your body into "Deep Recovery Mode" in just 5 nights.</p>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -73,36 +64,40 @@
 
         <section class="section section-alt">
             <div class="container text-center">
-                <span style="color: var(--gold); text-transform: uppercase; font-size: 0.8rem; font-weight: 700;">The Protocol</span>
-                <h2>The 5-Day Roadmap</h2>
+                <span style="color: var(--gold); text-transform: uppercase; font-size: 0.8rem; font-weight: 700;">Inside the Protocol</span>
+                <h2 style="margin-bottom: 50px;">The 5-Day Transformation</h2>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 50px;">
-                    
-                    <div class="box" style="padding: 2rem 1rem;">
-                        <span style="color: var(--gold); font-weight: 800;">01</span>
-                        <h4 style="font-family: 'Plus Jakarta Sans'; font-weight: 700; margin-top: 10px;">Reduce Puffiness</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;" class="grid-days mobile-stack">
+                    <div class="box day-card">
+                        <span style="color: var(--gold); font-weight: 800;">DAY 01</span>
+                        <h4>Internal Reset</h4>
+                        <p>Clear the "biological noise." Stabilize hydration and lower cortisol to prepare your skin for deep, visible recovery.</p>
                     </div>
-
-                    <div class="box" style="padding: 2rem 1rem;">
-                        <span style="color: var(--gold); font-weight: 800;">02</span>
-                        <h4 style="font-family: 'Plus Jakarta Sans'; font-weight: 700; margin-top: 10px;">Balance & Drain</h4>
+                    <div class="box day-card">
+                        <span style="color: var(--gold); font-weight: 800;">DAY 02</span>
+                        <h4>Drain & Refine</h4>
+                        <p>Active lymphatic drainage. Reduce excess fluid retention to eliminate morning puffiness and eye bags immediately.</p>
                     </div>
-
-                    <div class="box" style="padding: 2rem 1rem;">
-                        <span style="color: var(--gold); font-weight: 800;">03</span>
-                        <h4 style="font-family: 'Plus Jakarta Sans'; font-weight: 700; margin-top: 10px;">Repair & Strengthen</h4>
+                    <div class="box day-card">
+                        <span style="color: var(--gold); font-weight: 800;">DAY 03</span>
+                        <h4>Repair Phase</h4>
+                        <p>Deep cellular support. We reinforce the skin barrier and stabilize minerals to bring back firmness and resilience.</p>
                     </div>
-
-                    <div class="box" style="padding: 2rem 1rem;">
-                        <span style="color: var(--gold); font-weight: 800;">04</span>
-                        <h4 style="font-family: 'Plus Jakarta Sans'; font-weight: 700; margin-top: 10px;">Activate Glow</h4>
+                    <div class="box day-card">
+                        <span style="color: var(--gold); font-weight: 800;">DAY 04</span>
+                        <h4>Activate Glow</h4>
+                        <p>Oxygenate your tissue. Enhance blood flow and vascular tone to turn on a natural, healthy radiance from within.</p>
                     </div>
-
-                    <div class="box" style="padding: 2rem 1rem;">
-                        <span style="color: var(--gold); font-weight: 800;">05</span>
-                        <h4 style="font-family: 'Plus Jakarta Sans'; font-weight: 700; margin-top: 10px;">Lock The Results</h4>
+                    <div class="box day-card">
+                        <span style="color: var(--gold); font-weight: 800;">DAY 05</span>
+                        <h4>Fixation</h4>
+                        <p>Lock in the results. Stabilize your habits to ensure your new "baseline glow" stays permanent and repeatable.</p>
                     </div>
-
+                    <div class="box day-card" style="border: 1px solid var(--gold);">
+                        <span style="color: var(--gold); font-weight: 800;">BONUS <span class="tag-bonus">FREE</span></span>
+                        <h4>The Checklist</h4>
+                        <p>The consistency anchor. A simple daily tracker to eliminate guesswork and make your results predictable.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -110,62 +105,111 @@
         <section id="offer" class="section">
             <div class="container">
                 <div class="box" style="max-width: 900px; margin: 0 auto; padding: 0; overflow: hidden; border: 2px solid var(--midnight);">
-                    
                     <div style="background: var(--midnight); color: white; padding: 15px; text-align: center; font-weight: 800; font-size: 0.9rem; letter-spacing: 1px;">
                         ⚠️ FLASH OFFER: 85% DISCOUNT ACTIVE
                     </div>
                     
-                    <!-- FIX GRID -->
-                    <div class="two-columns mobile-stack">
-                        
-                        <div style="padding: 50px;">
-                            
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0;" class="offer-grid">
+                        <div style="padding: 40px;">
                             <div style="display: flex; gap: 15px; margin-bottom: 30px;" id="timer">
-                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="h">02</span><br><small style="font-size: 0.6rem;">Hours</small></div>
-                                <span style="font-size: 1.5rem; font-weight: 800;">:</span>
-                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="m">00</span><br><small style="font-size: 0.6rem;">Min</small></div>
-                                <span style="font-size: 1.5rem; font-weight: 800;">:</span>
-                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="s">00</span><br><small style="font-size: 0.6rem;">Sec</small></div>
+                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="h">02</span><br><small style="font-size: 0.6rem; text-transform: uppercase;">Hours</small></div>
+                                <span style="font-size: 1.5rem; font-weight: 800; color: var(--midnight);">:</span>
+                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="m">00</span><br><small style="font-size: 0.6rem; text-transform: uppercase;">Min</small></div>
+                                <span style="font-size: 1.5rem; font-weight: 800; color: var(--midnight);">:</span>
+                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="s">00</span><br><small style="font-size: 0.6rem; text-transform: uppercase;">Sec</small></div>
                             </div>
 
-                            <h3>Deep Glow Reset™</h3>
-
-                            <ul style="list-style: none; margin-top: 20px; padding: 0;">
-                                <li style="margin-bottom: 10px; font-size: 0.95rem;">✓ 5-Day Step-by-Step Routine (Easy to Follow)</li>
-                                <li style="margin-bottom: 10px; font-size: 0.95rem;">✓ Reduce Puffiness & Fluid Retention</li>
-                                <li style="margin-bottom: 10px; font-size: 0.95rem;">✓ Improve Skin Tone & Facial Definition</li>
-                                <li style="margin-bottom: 10px; font-size: 0.95rem;">✓ Daily Actions That Take Just Minutes</li>
+                            <h3 style="margin-bottom: 15px;">Deep Glow Reset™</h3>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="margin-bottom: 8px; font-size: 0.95rem;">✓ Full 5-Day Biological Blueprint</li>
+                                <li style="margin-bottom: 8px; font-size: 0.95rem;">✓ Daily Action Steps (Quick Apply)</li>
+                                <li style="margin-bottom: 8px; font-size: 0.95rem;">✓ Bonus: The Consistency Checklist</li>
+                                <li style="margin-bottom: 8px; font-size: 0.95rem;">✓ Lifetime Access to Updates</li>
                             </ul>
-
-                            <p style="font-size: 0.9rem; margin-top: 15px; color: var(--text-muted);">
-                                Most people start noticing visible changes in 2–3 days.
-                            </p>
-
                         </div>
 
-                        <div style="background: var(--surface-light); padding: 50px; text-align: center; border-left: 1px solid #eee;">
-                            
+                        <div class="offer-right" style="background: var(--surface-light); padding: 40px; text-align: center; border-left: 1px solid #eee;">
                             <span style="text-decoration: line-through; color: var(--text-muted);">Regularly $47.90</span>
-                            
-                            <div style="font-size: 4.5rem; font-weight: 800; color: var(--midnight); line-height: 1; margin: 10px 0;">
-                                $7.90
-                            </div>
+                            <div style="font-size: 4rem; font-weight: 800; color: var(--midnight); line-height: 1; margin: 10px 0;">$7.90</div>
                             
                             <div class="cta-container" style="margin-top: 20px;">
-                                <a href="#" class="cta" style="width: 100%;">Get Instant Access</a>
-                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px;">
-                                    ONE-TIME PAYMENT • LIFETIME ACCESS
-                                </span>
+                                <a href="#" class="cta" style="width: 100%; padding: 15px;">Get Instant Access</a>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px;">SECURE CHECKOUT • NO SUBSCRIPTIONS</span>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
 
+        <section class="section section-alt">
+            <div class="container">
+                <div class="box" style="max-width: 800px; margin: 0 auto;">
+                    <h2 class="text-center" style="margin-bottom: 40px;">Common Questions</h2>
+                    
+                    <div class="faq-list">
+                        <div style="border-bottom: 1px solid #eee; padding: 20px 0;">
+                            <button onclick="toggleFaq(this)" style="width: 100%; background: none; border: none; text-align: left; font-family: 'Plus Jakarta Sans'; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                                How fast are the results? <span>+</span>
+                            </button>
+                            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: 0.3s;">
+                                <p style="padding-top: 15px; font-size: 1rem;">Most users notice a significant reduction in puffiness by Day 2. Full texture restoration is achieved by Day 5.</p>
+                            </div>
+                        </div>
+
+                        <div style="border-bottom: 1px solid #eee; padding: 20px 0;">
+                            <button onclick="toggleFaq(this)" style="width: 100%; background: none; border: none; text-align: left; font-family: 'Plus Jakarta Sans'; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                                Is it hard to follow? <span>+</span>
+                            </button>
+                            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: 0.3s;">
+                                <p style="padding-top: 15px; font-size: 1rem;">No. It was designed for busy people. The daily actions take less than 10 minutes and fit into any routine.</p>
+                            </div>
+                        </div>
+
+                        <div style="padding: 20px 0;">
+                            <button onclick="toggleFaq(this)" style="width: 100%; background: none; border: none; text-align: left; font-family: 'Plus Jakarta Sans'; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                                Money back guarantee? <span>+</span>
+                            </button>
+                            <div class="faq-content" style="max-height: 0; overflow: hidden; transition: 0.3s;">
+                                <p style="padding-top: 15px; font-size: 1rem;">Yes. 7-day no-questions-asked guarantee. If you don't see the glow, we refund you immediately.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <footer class="section" style="padding: 50px 0; border-top: 1px solid #eee;">
+        <div class="container text-center">
+            <p style="font-size: 0.75rem; letter-spacing: 2px; color: var(--text-muted); margin: 0 auto;">© 2026 DEEP GLOW PROTOCOL • THE BIOLOGICAL STANDARD</p>
+        </div>
+    </footer>
+
+    <script>
+        function startTimer(duration) {
+            let timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                document.getElementById('h').textContent = hours < 10 ? "0" + hours : hours;
+                document.getElementById('m').textContent = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById('s').textContent = seconds < 10 ? "0" + seconds : seconds;
+                if (--timer < 0) timer = duration;
+            }, 1000);
+        }
+
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            const isOpen = content.style.maxHeight !== "0px" && content.style.maxHeight !== "";
+            document.querySelectorAll('.faq-content').forEach(c => c.style.maxHeight = null);
+            if (!isOpen) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        window.onload = function () { startTimer(7200); };
+    </script>
 </body>
 </html>
