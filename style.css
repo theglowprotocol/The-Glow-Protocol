@@ -16,11 +16,17 @@
 /* Evita overflow e esmagamento */
 .box {
     max-width: 100%;
+    width: 100%;
 }
 
 /* Melhor leitura geral */
 .container {
     padding: 0 20px;
+}
+
+/* Evita elementos estourando horizontal */
+body {
+    overflow-x: hidden;
 }
 
 /* Ajustes reais de mobile */
@@ -29,6 +35,7 @@
     /* Força tudo virar 1 coluna */
     .mobile-stack,
     .two-columns {
+        display: grid;
         grid-template-columns: 1fr !important;
     }
 
@@ -40,6 +47,7 @@
     /* Evita textos esmagados */
     p {
         font-size: 1rem;
+        line-height: 1.5;
     }
 
     /* Timer quebra linha corretamente */
@@ -48,10 +56,13 @@
         justify-content: center;
         flex-wrap: wrap;
         gap: 10px;
+        text-align: center;
     }
 
-    /* Evita colunas grudadas */
+    /* 🔴 CORREÇÃO IMPORTANTE:
+       isso aqui estava quebrando layout geral */
     [style*="grid-template-columns"] {
+        display: grid !important;
         grid-template-columns: 1fr !important;
     }
 }
