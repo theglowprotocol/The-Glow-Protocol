@@ -31,6 +31,44 @@
             text-transform: uppercase;
             margin-top: 10px;
         }
+
+        /* AJUSTES DA SEÇÃO FAQ */
+        .faq-box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+        }
+        .faq-trigger {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 20px 0;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--midnight);
+        }
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-content p {
+            padding-bottom: 20px;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
         @media (max-width: 768px) {
             .mobile-stack { display: block !important; }
             .mobile-stack > div { margin-bottom: 20px; }
@@ -176,28 +214,27 @@
         </section>
 
         <section class="section-padding container">
-        <div class="faq-box">
-            <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem;">Questions?</h2>
-            <div class="faq-item">
-                <button class="faq-trigger" onclick="toggleFaq(this)">How soon will I see results? <span>+</span></button>
-                <div class="faq-content"><p>You will notice a reduction in morning puffiness by Day 2. By Day 5, your skin's texture and natural "glow" will be visibly restored.</p></div>
+            <div class="faq-box">
+                <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem;">Questions?</h2>
+                <div class="faq-item">
+                    <button class="faq-trigger" onclick="toggleFaq(this)">How soon will I see results? <span>+</span></button>
+                    <div class="faq-content"><p>You will notice a reduction in morning puffiness by Day 2. By Day 5, your skin's texture and natural "glow" will be visibly restored.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger" onclick="toggleFaq(this)">Do I need to buy products? <span>+</span></button>
+                    <div class="faq-content"><p>No. This protocol relies on biological triggers like timing, temperature, and specific movements. No extra serums required.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger" onclick="toggleFaq(this)">Is it a subscription? <span>+</span></button>
+                    <div class="faq-content"><p>No. This is a one-time investment of $7.90 for lifetime digital access to the protocol.</p></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger" onclick="toggleFaq(this)">What if it doesn't work? <span>+</span></button>
+                    <div class="faq-content"><p>We offer a 7-day money-back guarantee. If you don't feel a difference, we refund your $7.90 immediately.</p></div>
+                </div>
             </div>
-            <div class="faq-item">
-                <button class="faq-trigger" onclick="toggleFaq(this)">Do I need to buy products? <span>+</span></button>
-                <div class="faq-content"><p>No. This protocol relies on biological triggers like timing, temperature, and specific movements. No extra serums required.</p></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-trigger" onclick="toggleFaq(this)">Is it a subscription? <span>+</span></button>
-                <div class="faq-content"><p>No. This is a one-time investment of $7.90 for lifetime digital access to the protocol.</p></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-trigger" onclick="toggleFaq(this)">What if it doesn't work? <span>+</span></button>
-                <div class="faq-content"><p>We offer a 7-day money-back guarantee. If you don't feel a difference, we refund your $7.90 immediately.</p></div>
-            </div>
-        </div>
-    </section>
-
-
+        </section>
+    </main>
         
     <footer>
         © 2026 DEEP GLOW PROTOCOL • THE BIOLOGICAL STANDARD
@@ -225,7 +262,7 @@
             const content = btn.nextElementSibling;
             const isOpen = content.style.maxHeight;
             document.querySelectorAll('.faq-content').forEach(c => c.style.maxHeight = null);
-            content.style.maxHeight = isOpen ? null : content.scrollHeight + "px";
+            content.style.maxHeight = (isOpen && isOpen !== "0px") ? null : content.scrollHeight + "px";
         }
 
         window.onload = function () { startTimer(7200); };
