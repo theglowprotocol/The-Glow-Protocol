@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Variante: Fluxo Numérico Cyberpunk</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #050505; /* Preto quase puro */
+        }
+
+        canvas {
+            display: block;
+        }
+
+        /* Conteúdo de exemplo sobre o fundo */
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #00ff41; /* Verde clássico Matrix */
+            font-family: 'Courier New', Courier, monospace; /* Fonte mono */
+            text-align: center;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
+            background: rgba(0,0,0,0.6);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>SYSTEM_STATUS: OK</h1>
+        <p>Aguardando input de dados...</p>
+    </div>
+
+    <canvas id="dataCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('dataCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+
+        let dataPoints = [];
+        
+        // --- CONFIGURAÇÕES DO FLUXO ---
+        const config = {
+            count: 300,             // Mais pontos porque são menores
+            speedMin: 0.2,          // Muito lento
+            speedMax: 2.5,          // Velocidade de pico
+            colors: [               // Paleta Cyberpunk
+                'rgba(0, 255, 65,',  // Verde Matrix
+                'rgba(0, 255, 255,', // Ciano Neon
+                'rgba(157, 0, 255,'  // Roxo Neon
+            ],
+            // Caracteres que serão usados
+            chars: "0123456789ABCDEFHIJKLMNOPQRSTUVWXYZ@#$%"
+        };
+
+        class DataPoint {
+            constructor() {
+                this.init(true);
+            }
+
+            init(randomX = false) {
+                // Movimento horizontal agora
+                this.y = Math.random() * canvas.height;
+                this.x = randomX ? (Math.random() * canvas.width) : -20; // Começa na esquerda
+                
+                this.speed = Math.random() * (config.speedMax - config.speedMin) + config.speedMin;
+                
+                // Define a opacidade base e a cor base
+                this.baseOpacity = Math.random() * 0.4 + 0.1;
+                this.colorBase = config.colors[Math.floor(Math.random() * config.colors.length)];
+                
+                // Caractere aleatório
+                this.char = config.chars[Math.floor(Math.random() * config.chars.length)];
+                
+                // Tamanho da fonte varia com a velocidade (profundidade)
+                this.fontSize = Math.floor(this.speed * 6) + 8;
+            }
+
+            draw() {
+                // A opacidade pulsa levemente para dar vida
+                const pulse = Math.sin(Date.now() * 0.001 * this.speed) * 0.1;
+                const finalOpacity = Math.max(0.05, this.baseOpacity + pulse);
+
+                ctx.fillStyle = `${this.colorBase} ${finalOpacity})`;
+                ctx.font = `${this.fontSize}px 'Courier New', monospace`;
+                ctx.fillText(this.char, this.x, this.y);
+
+                // Efeito opcional de "Glow" (Brilho) - consome mais processamento
+                if (this.speed > 2) {
+                    ctx.shadowBlur = 5;
+                    ctx.shadowColor = ctx.fillStyle;
+                } else {
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            update() {
+                this.x += this.speed;
+
+                // Resetar quando sair pela direita
+                if (this.x > canvas.width + 20) {
+                    this.init(false); // Reinicia na esquerda
+                }
+                this.draw();
+            }
+        }
+
+        function initDataFlow() {
+            dataPoints = [];
+            for (let i = 0; i < config.count; i++) {
+                dataPoints.push(new DataPoint());
+            }
+        }
+
+        function animate() {
+            // Fundo preto sólido (sem rastro para manter a nitidez dos caracteres)
+            ctx.fillStyle = '#050505';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            dataPoints.forEach(point => point.update());
+            
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initDataFlow();
+        });
+
+        // Início
+        initDataFlow();
+        animate();
+    </script>
+</body>
+</html>
