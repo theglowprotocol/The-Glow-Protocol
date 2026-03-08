@@ -2,114 +2,144 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chuva Realista e Lenta no Vidro</title>
+    <title>Chuva Suave e Realista</title>
     <style>
-        body, html {
+        body {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000; /* Fundo preto enquanto carrega */
+            overflow: hidden; /* Evita barras de rolagem */
+            /* Fundo escuro levemente azulado para contrastar com a água */
+            background-color: #0d1117; 
         }
 
-        /* A imagem original fica oculta, o Rainyday usa o canvas */
-        #background {
-            display: none;
-        }
-
-        /* O canvas que o Rainyday cria preenche a tela */
         canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+            display: block;
         }
 
-        /* Conteúdo sobre o fundo */
+        /* Conteúdo de exemplo sobre o fundo */
         .content {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             text-align: center;
-            z-index: 10; /* Garante que o texto fique acima da chuva */
+            pointer-events: none; /* Permite interações com o fundo, se necessário */
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            pointer-events: none; /* Permite clicar através do texto */
         }
     </style>
 </head>
 <body>
 
-    <img id="background" alt="background" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1920" />
-
     <div class="content">
-        <h1>Chuva no Vidro</h1>
-        <p>Animação ultra lenta e realista.</p>
+        <h1>Chuva Serena</h1>
+        <p>Um ambiente calmo e relaxante.</p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/rainyday.js@1.1.0/rainyday.min.js"></script>
-    
+    <canvas id="rainCanvas"></canvas>
+
     <script>
-        function playRain() {
-            const image = document.getElementById('background');
-            
-            image.onload = function() {
-                // Configuração básica do Rainyday.js
-                const engine = new Rainyday({
-                    image: this, // A imagem de fundo
-                    blur: 10,    // Desfoca o fundo para dar profundidade
-                    opacity: 1,
-                    parentElement: document.body // Onde o canvas será inserido
-                });
+        const canvas = document.getElementById('rainCanvas');
+        const ctx = canvas.getContext('2d');
 
-                // --- CONFIGURAÇÃO DA CHUVA ---
-                // O método 'rain' define as camadas de gotas.
+        // Configuração inicial do tamanho do Canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+
+        let particles = [];
+        
+        // --- CONFIGURAÇÕES DA CHUVA ---
+        const config = {
+            count: 150,           // Quantidade de gotas (aumentado para compensar a lentidão)
+            speedMin: 0.5,        // Velocidade mínima (MUITO mais lento)
+            speedMax: 1.5,        // Velocidade máxima (MUITO mais lento)
+            lengthMin: 5,         // Comprimento mínimo da gota
+            lengthMax: 25,        // Comprimento máximo da gota
+            opacityMin: 0.05,     // Transparência mínima (quase invisível)
+            opacityMax: 0.25,     // Transparência máxima (suave)
+            color: '174, 194, 224' // Cor RGB base das gotas
+        };
+
+        class RainDrop {
+            constructor() {
+                this.init(true); // 'true' para espalhar inicialmente por toda a tela
+            }
+
+            init(randomY = false) {
+                this.x = Math.random() * canvas.width;
+                // Se randomY for true, espalha na tela toda. Se false, começa no topo.
+                this.y = randomY ? (Math.random() * canvas.height) : -config.lengthMax;
                 
-                // Camada 1: Gotas minúsculas e quase estáticas (o 'grudado')
-                // engine.rain([ [tamanho_min, tamanho_max, frequencia] ], tempo_transicao)
-                engine.rain([
-                    [1, 2, 20] // Gotas pequenas (1-2), frequência alta (20)
-                ], 100);
+                // Define características aleatórias dentro dos limites da configuração
+                this.length = Math.random() * (config.lengthMax - config.lengthMin) + config.lengthMin;
+                this.speed = Math.random() * (config.speedMax - config.speedMin) + config.speedMin;
+                this.opacity = Math.random() * (config.opacityMax - config.opacityMin) + config.opacityMin;
+                this.lineWidth = Math.random() * 0.8 + 0.2; // Espessuras variadas para profundidade
+            }
 
-                // Camada 2: Gotas médias que escorrem muito devagar
-                engine.rain([
-                    [3, 5, 0.5] // Gotas médias (3-5), frequência muito baixa (0.5)
-                ], 100);
+            draw() {
+                // Cria um gradiente linear para a gota (suaviza a ponta)
+                // Começa na cabeça da gota (y) e termina na cauda (y + length)
+                let gradient = ctx.createLinearGradient(this.x, this.y, this.x, this.y + this.length);
+                
+                // A "cabeça" da gota é mais visível
+                gradient.addColorStop(0, `rgba(${config.color}, ${this.opacity})`);
+                // A "cauda" desaparece suavemente
+                gradient.addColorStop(1, `rgba(${config.color}, 0)`);
 
-                // --- AJUSTE DE VELOCIDADE (Ultra Lento) ---
-                // Vamos sobrescrever a velocidade global de queda.
-                // Valores maiores = mais lento. Padrão costuma ser 10-20.
-                engine.gravity = 100; // Define a "força da gravidade" das gotas
+                ctx.beginPath();
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = this.lineWidth;
+                ctx.lineCap = 'round'; // Pontas arredondadas para maior suavidade
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x, this.y + this.length);
+                ctx.stroke();
+            }
 
-                // Para gotas que grudam, diminuímos a chance de escorrer:
-                engine.trailOptions = {
-                    smooth: true,
-                    density: 0.1, // Menos rastro
-                    strength: 0.2  // Rastro mais fraco
-                };
-            };
+            update() {
+                this.y += this.speed;
 
-            // Se a imagem já estiver em cache, o onload não dispara. Forçamos aqui.
-            if (image.complete) {
-                image.onload();
+                // Resetar a gota quando ela sai da tela
+                if (this.y > canvas.height) {
+                    this.init(false); // Reinicia no topo
+                }
+                this.draw();
             }
         }
 
-        // Inicia a chuva após o carregamento da janela
-        window.onload = playRain;
+        // Cria todas as partículas
+        function initRain() {
+            particles = [];
+            for (let i = 0; i < config.count; i++) {
+                particles.push(new RainDrop());
+            }
+        }
 
-        // Ajusta o canvas se a janela for redimensionada
-        window.addEventListener('resize', function() {
-            // O Rainyday não lida bem com resize nativamente sem reiniciar.
-            // Para um fundo, é melhor recarregar o script ou aceitar o esticamento.
-            location.reload(); 
+        // Loop de animação
+        function animate() {
+            // Limpa o canvas. O valor '0.3' no alpha cria um rastro muito leve e suave.
+            ctx.fillStyle = 'rgba(13, 17, 23, 0.3)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Atualiza e desenha cada gota
+            particles.forEach(drop => drop.update());
+            
+            requestAnimationFrame(animate);
+        }
+
+        // Evento de redimensionamento da janela
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initRain(); // Reinicia a chuva para se adaptar ao novo tamanho
         });
+
+        // Início
+        initRain();
+        animate();
     </script>
 </body>
 </html>
