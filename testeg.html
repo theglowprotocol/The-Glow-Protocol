@@ -2,48 +2,45 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Variante: Fluxo Numérico Cyberpunk</title>
+    <title>Fluxo de Gotículas Suaves</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #050505; /* Preto quase puro */
+            /* Um gradiente profundo para dar dimensão ao fundo */
+            background: radial-gradient(circle at center, #1a2a3a 0%, #070b10 100%);
         }
 
         canvas {
             display: block;
         }
 
-        /* Conteúdo de exemplo sobre o fundo */
         .content {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #00ff41; /* Verde clássico Matrix */
-            font-family: 'Courier New', Courier, monospace; /* Fonte mono */
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Segoe UI', sans-serif;
             text-align: center;
             pointer-events: none;
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.7);
-            background: rgba(0,0,0,0.6);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 255, 65, 0.3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
     <div class="content">
-        <h1>SYSTEM_STATUS: OK</h1>
-        <p>Aguardando input de dados...</p>
+        <h2 style="font-weight: 300;">Atmosfera</h2>
+        <p style="font-size: 0.8em; opacity: 0.5;">Partículas em suspensão</p>
     </div>
 
-    <canvas id="dataCanvas"></canvas>
+    <canvas id="dropletCanvas"></canvas>
 
     <script>
-        const canvas = document.getElementById('dataCanvas');
+        const canvas = document.getElementById('dropletCanvas');
         const ctx = canvas.getContext('2d');
 
         function resizeCanvas() {
@@ -52,58 +49,58 @@
         }
         resizeCanvas();
 
-        let dataPoints = [];
+        let droplets = [];
         
-        // --- CONFIGURAÇÕES DO FLUXO ---
         const config = {
-            count: 300,             // Mais pontos porque são menores
-            speedMin: 0.2,          // Muito lento
-            speedMax: 2.5,          // Velocidade de pico
-            colors: [               // Paleta Cyberpunk
-                'rgba(0, 255, 65,',  // Verde Matrix
-                'rgba(0, 255, 255,', // Ciano Neon
-                'rgba(157, 0, 255,'  // Roxo Neon
-            ],
-            // Caracteres que serão usados
-            chars: "0123456789ABCDEFHIJKLMNOPQRSTUVWXYZ@#$%"
+            count: 120,            // Quantidade de gotículas
+            speedMin: 0.1,         // Movimento quase imperceptível
+            speedMax: 0.8,         // Velocidade máxima suave
+            baseColor: '200, 220, 255' // Tom levemente azulado/branco
         };
 
-        class DataPoint {
+        class Droplet {
             constructor() {
                 this.init(true);
             }
 
             init(randomX = false) {
-                // Movimento horizontal agora
                 this.y = Math.random() * canvas.height;
-                this.x = randomX ? (Math.random() * canvas.width) : -20; // Começa na esquerda
+                this.x = randomX ? (Math.random() * canvas.width) : -20;
                 
-                this.speed = Math.random() * (config.speedMax - config.speedMin) + config.speedMin;
+                // Atributos baseados na "profundidade"
+                // Gotas mais rápidas são maiores e mais opacas (estão na frente)
+                this.z = Math.random(); // Fator de profundidade 0 a 1
                 
-                // Define a opacidade base e a cor base
-                this.baseOpacity = Math.random() * 0.4 + 0.1;
-                this.colorBase = config.colors[Math.floor(Math.random() * config.colors.length)];
+                this.speed = this.z * (config.speedMax - config.speedMin) + config.speedMin;
+                this.radius = this.z * 4 + 1; // Tamanho entre 1 e 5 pixels
+                this.opacity = this.z * 0.3 + 0.05; // Opacidade entre 5% e 35%
                 
-                // Caractere aleatório
-                this.char = config.chars[Math.floor(Math.random() * config.chars.length)];
-                
-                // Tamanho da fonte varia com a velocidade (profundidade)
-                this.fontSize = Math.floor(this.speed * 6) + 8;
+                // Oscilação vertical suave (para não ser uma linha reta perfeita)
+                this.oscillation = Math.random() * 0.5;
+                this.oscSpeed = Math.random() * 0.02;
+                this.time = Math.random() * 100;
             }
 
             draw() {
-                // A opacidade pulsa levemente para dar vida
-                const pulse = Math.sin(Date.now() * 0.001 * this.speed) * 0.1;
-                const finalOpacity = Math.max(0.05, this.baseOpacity + pulse);
+                this.time += this.oscSpeed;
+                const currentY = this.y + Math.sin(this.time) * 10 * this.oscillation;
 
-                ctx.fillStyle = `${this.colorBase} ${finalOpacity})`;
-                ctx.font = `${this.fontSize}px 'Courier New', monospace`;
-                ctx.fillText(this.char, this.x, this.y);
+                // Desenha a gotícula como um círculo suave
+                ctx.beginPath();
+                
+                // Cria um leve brilho interno (Radial Gradient) para cada gota
+                let grad = ctx.createRadialGradient(this.x, currentY, 0, this.x, currentY, this.radius);
+                grad.addColorStop(0, `rgba(${config.baseColor}, ${this.opacity})`);
+                grad.addColorStop(1, `rgba(${config.baseColor}, 0)`);
 
-                // Efeito opcional de "Glow" (Brilho) - consome mais processamento
-                if (this.speed > 2) {
-                    ctx.shadowBlur = 5;
-                    ctx.shadowColor = ctx.fillStyle;
+                ctx.fillStyle = grad;
+                ctx.arc(this.x, currentY, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Adiciona um leve "bloom" (brilho) para as gotas mais próximas
+                if (this.z > 0.8) {
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = `rgba(${config.baseColor}, ${this.opacity})`;
                 } else {
                     ctx.shadowBlur = 0;
                 }
@@ -112,38 +109,34 @@
             update() {
                 this.x += this.speed;
 
-                // Resetar quando sair pela direita
                 if (this.x > canvas.width + 20) {
-                    this.init(false); // Reinicia na esquerda
+                    this.init(false);
                 }
                 this.draw();
             }
         }
 
-        function initDataFlow() {
-            dataPoints = [];
+        function initScene() {
+            droplets = [];
             for (let i = 0; i < config.count; i++) {
-                dataPoints.push(new DataPoint());
+                droplets.push(new Droplet());
             }
         }
 
         function animate() {
-            // Fundo preto sólido (sem rastro para manter a nitidez dos caracteres)
-            ctx.fillStyle = '#050505';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Limpa o canvas com o fundo escuro
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            dataPoints.forEach(point => point.update());
-            
+            droplets.forEach(d => d.update());
             requestAnimationFrame(animate);
         }
 
         window.addEventListener('resize', () => {
             resizeCanvas();
-            initDataFlow();
+            initScene();
         });
 
-        // Início
-        initDataFlow();
+        initScene();
         animate();
     </script>
 </body>
