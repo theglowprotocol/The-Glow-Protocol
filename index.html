@@ -7,7 +7,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Ajustes de suporte para garantir a responsividade sem mudar o CSS externo */
+        /* Fundo Animado */
+        #dropletCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #030508;
+        }
+
+        /* Ajustes de suporte para garantir a responsividade */
         .module-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -17,19 +28,21 @@
         .module-card {
             padding: 1.5rem;
             text-align: left;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02);
         }
-        .module-card h4 { margin-bottom: 10px; color: var(--midnight); }
-        .module-card p { font-size: 0.9rem; line-height: 1.4; color: #4b5563; }
+        .module-card h4 { margin-bottom: 10px; color: #fff; }
+        .module-card p { font-size: 0.9rem; line-height: 1.4; color: #a0aec0; }
         .benefit-tag {
             display: inline-block;
-            background: #f3f4f6;
+            background: rgba(255,255,255,0.1);
             padding: 2px 8px;
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
             margin-top: 10px;
+            color: #e2e8f0;
         }
 
         /* AJUSTES DA SEÇÃO FAQ */
@@ -39,7 +52,7 @@
             padding: 40px 20px;
         }
         .faq-item {
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 10px;
         }
         .faq-trigger {
@@ -55,7 +68,7 @@
             font-family: 'Inter', sans-serif;
             font-weight: 600;
             font-size: 1.1rem;
-            color: var(--midnight);
+            color: #fff;
         }
         .faq-content {
             max-height: 0;
@@ -64,7 +77,7 @@
         }
         .faq-content p {
             padding-bottom: 20px;
-            color: #666;
+            color: #a0aec0;
             line-height: 1.6;
             margin: 0;
         }
@@ -79,15 +92,17 @@
 </head>
 <body>
 
+    <canvas id="dropletCanvas"></canvas>
+
     <header class="section">
         <div class="container text-center">
             <span style="color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">Biological Protocol • 5-Night Reset</span>
             <h1>Wake Up to Radiant Skin <br> <span style="font-style: italic; font-weight: 400; font-family: serif;">Results in 5 Days.</span></h1>
-            <p style="margin: 0 auto; max-width: 600px;">Stop fighting your biology. A simple, science-based protocol to neutralize stress and trigger deep cellular repair while you sleep. Fast to apply, impossible to ignore.</p>
+            <p style="margin: 0 auto; max-width: 600px; color: #cbd5e1;">Stop fighting your biology. A simple, science-based protocol to neutralize stress and trigger deep cellular repair while you sleep. Fast to apply, impossible to ignore.</p>
             
             <div class="cta-container">
                 <a href="#offer" class="cta">Start My 5-Day Reset</a>
-                <span class="cta-secondary">Instant Access • Results by Day 2</span>
+                <span class="cta-secondary" style="color: #a0aec0;">Instant Access • Results by Day 2</span>
             </div>
         </div>
     </header>
@@ -95,7 +110,7 @@
     <main>
         <section class="section section-dark">
             <div class="container">
-                <div class="box section-dark" style="border: 1px dashed rgba(255,255,255,0.1); padding: 2rem;">
+                <div class="box section-dark" style="border: 1px dashed rgba(255,255,255,0.1); padding: 2rem; background: rgba(0,0,0,0.3);">
                     <div style="display: flex; gap: 40px; align-items: center;" class="mobile-stack">
                         <div style="flex: 1.2;">
                             <span style="color: var(--gold); text-transform: uppercase; font-size: 0.8rem; font-weight: 700;">The Diagnosis</span>
@@ -108,7 +123,7 @@
                             </div>
                         </div>
                         
-                        <div class="box" style="background: var(--midnight-light); padding: 2rem; flex: 0.8;">
+                        <div class="box" style="background: rgba(255,255,255,0.05); padding: 2rem; flex: 0.8;">
                             <h3 style="color: var(--gold); font-size: 1.25rem; margin-bottom: 1rem;">The Rapid Solution</h3>
                             <p style="font-size: 0.95rem; color: #94A3B8;">This isn't a long routine. It's a <strong>biological override</strong>. In 5 nights, we realign your internal environment to force your body into "Deep Regeneration Mode."</p>
                         </div>
@@ -117,10 +132,10 @@
             </div>
         </section>
 
-        <section class="section section-alt">
+        <section class="section section-alt" style="background: rgba(0,0,0,0.2);">
             <div class="container text-center">
                 <span style="color: var(--gold); text-transform: uppercase; font-size: 0.8rem; font-weight: 700;">The Roadmap</span>
-                <h2>What you'll achieve in 5 Days</h2>
+                <h2 style="color: white;">What you'll achieve in 5 Days</h2>
                 
                 <div class="module-grid">
                     <div class="box module-card">
@@ -160,7 +175,7 @@
 
                     <div class="box module-card" style="border: 1px solid var(--gold);">
                         <span style="background: var(--gold); color: white; padding: 2px 6px; font-weight: 800; font-size: 0.65rem; border-radius: 3px;">GIFT</span>
-                        <h4 style="margin-top: 5px;">The Consistency Checklist</h4>
+                        <h4 style="margin-top: 5px; color: #fff;">The Consistency Checklist</h4>
                         <p>Eliminate guesswork. A high-speed accountability tool to track the essentials and prevent regression.</p>
                         <span class="benefit-tag" style="background: #FFFBEB; color: #B45309;">Focus: Sustainable Growth</span>
                     </div>
@@ -170,42 +185,42 @@
 
         <section id="offer" class="section">
             <div class="container">
-                <div class="box" style="max-width: 900px; margin: 0 auto; padding: 0; overflow: hidden; border: 2px solid var(--midnight);">
-                    <div style="background: var(--midnight); color: white; padding: 15px; text-align: center; font-weight: 800; font-size: 0.9rem; letter-spacing: 1px;">
+                <div class="box" style="max-width: 900px; margin: 0 auto; padding: 0; overflow: hidden; border: 2px solid var(--gold); background: rgba(255,255,255,0.05);">
+                    <div style="background: var(--gold); color: white; padding: 15px; text-align: center; font-weight: 800; font-size: 0.9rem; letter-spacing: 1px;">
                         ⚠️ FLASH OFFER: 85% DISCOUNT ACTIVE
                     </div>
                     
                     <div style="display: flex;" class="mobile-stack">
                         <div style="padding: 40px; flex: 1;">
                             <div style="display: flex; gap: 15px; margin-bottom: 30px;" id="timer">
-                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="h">02</span><br><small style="font-size: 0.6rem; text-transform: uppercase;">Hours</small></div>
-                                <span style="font-size: 1.5rem; font-weight: 800; color: var(--midnight);">:</span>
-                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="m">00</span><br><small style="font-size: 0.6rem; text-transform: uppercase;">Min</small></div>
-                                <span style="font-size: 1.5rem; font-weight: 800; color: var(--midnight);">:</span>
-                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="s">00</span><br><small style="font-size: 0.6rem; text-transform: uppercase;">Sec</small></div>
+                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--gold);" id="h">02</span><br><small style="font-size: 0.6rem; text-transform: uppercase; color: #fff;">Hours</small></div>
+                                <span style="font-size: 1.5rem; font-weight: 800; color: #fff;">:</span>
+                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--gold);" id="m">00</span><br><small style="font-size: 0.6rem; text-transform: uppercase; color: #fff;">Min</small></div>
+                                <span style="font-size: 1.5rem; font-weight: 800; color: #fff;">:</span>
+                                <div><span style="font-size: 1.5rem; font-weight: 800; color: var(--gold);" id="s">00</span><br><small style="font-size: 0.6rem; text-transform: uppercase; color: #fff;">Sec</small></div>
                             </div>
 
-                            <h3 style="font-size: 1.8rem;">Deep Glow Reset™</h3>
+                            <h3 style="font-size: 1.8rem; color: #fff;">Deep Glow Reset™</h3>
                             <ul style="list-style: none; margin-top: 20px; padding: 0;">
-                                <li style="margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;">
+                                <li style="margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; color: #e2e8f0;">
                                     <span style="color: var(--gold);">✓</span> The Complete 5-Day Blueprint
                                 </li>
-                                <li style="margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;">
+                                <li style="margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; color: #e2e8f0;">
                                     <span style="color: var(--gold);">✓</span> Circadian Environment Guide
                                 </li>
-                                <li style="margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;">
+                                <li style="margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; color: #e2e8f0;">
                                     <span style="color: var(--gold);">✓</span> <strong>Bonus:</strong> The Accountability Checklist
                                 </li>
                             </ul>
                         </div>
 
-                        <div style="background: var(--surface-light); padding: 40px; text-align: center; border-left: 1px solid #eee; flex: 1;">
-                            <span style="text-decoration: line-through; color: var(--text-muted);">Regularly $47.90</span>
-                            <div style="font-size: 4.5rem; font-weight: 800; color: var(--midnight); line-height: 1; margin: 10px 0;">$7.90</div>
+                        <div style="background: rgba(255,255,255,0.05); padding: 40px; text-align: center; border-left: 1px solid rgba(255,255,255,0.1); flex: 1;">
+                            <span style="text-decoration: line-through; color: #a0aec0;">Regularly $47.90</span>
+                            <div style="font-size: 4.5rem; font-weight: 800; color: #fff; line-height: 1; margin: 10px 0;">$7.90</div>
                             
                             <div class="cta-container" style="margin-top: 20px;">
                                 <a href="https://pay.kiwify.com/sRU668G" class="cta" style="width: 100%; display: block; box-sizing: border-box;">Unlock Everything Now</a>
-                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px; display: block;">ONE-TIME PAYMENT • LIFETIME ACCESS</span>
+                                <span style="font-size: 0.7rem; color: #a0aec0; margin-top: 10px; display: block;">ONE-TIME PAYMENT • LIFETIME ACCESS</span>
                             </div>
                         </div>
                     </div>
@@ -215,7 +230,7 @@
 
         <section class="section-padding container">
             <div class="faq-box">
-                <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem;">Questions?</h2>
+                <h2 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem; color: #fff;">Questions?</h2>
                 <div class="faq-item">
                     <button class="faq-trigger" onclick="toggleFaq(this)">How soon will I see results? <span>+</span></button>
                     <div class="faq-content"><p>You will notice a reduction in morning puffiness by Day 2. By Day 5, your skin's texture and natural "glow" will be visibly restored.</p></div>
@@ -236,11 +251,49 @@
         </section>
     </main>
         
-    <footer>
+    <footer style="color: #a0aec0;">
         © 2026 DEEP GLOW PROTOCOL • THE BIOLOGICAL STANDARD
     </footer>
 
     <script>
+        // Animação de Fundo
+        const canvas = document.getElementById('dropletCanvas');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resizeCanvas();
+        let droplets = [];
+        const config = { count: 100, speedMin: 0.05, speedMax: 0.4, baseColor: '180, 200, 230' };
+        class Droplet {
+            constructor() { this.init(true); }
+            init(randomX = false) {
+                this.y = Math.random() * canvas.height;
+                this.x = randomX ? (Math.random() * canvas.width) : -50;
+                this.z = Math.random();
+                this.speed = (this.z * (config.speedMax - config.speedMin) + config.speedMin) * 0.8;
+                this.radius = this.z * 3 + 0.5;
+                this.opacity = this.z * 0.2 + 0.02;
+                this.oscillation = Math.random() * 0.3;
+                this.oscSpeed = Math.random() * 0.01;
+                this.time = Math.random() * 100;
+            }
+            draw() {
+                this.time += this.oscSpeed;
+                const currentY = this.y + Math.sin(this.time) * 15 * this.oscillation;
+                ctx.beginPath();
+                let grad = ctx.createRadialGradient(this.x, currentY, 0, this.x, currentY, this.radius);
+                grad.addColorStop(0, `rgba(${config.baseColor}, ${this.opacity})`);
+                grad.addColorStop(1, `rgba(${config.baseColor}, 0)`);
+                ctx.fillStyle = grad;
+                ctx.arc(this.x, currentY, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            update() { this.x += this.speed; if (this.x > canvas.width + 50) this.init(false); this.draw(); }
+        }
+        function initScene() { droplets = []; for (let i = 0; i < config.count; i++) droplets.push(new Droplet()); }
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); droplets.forEach(d => d.update()); requestAnimationFrame(animate); }
+        window.addEventListener('resize', () => { resizeCanvas(); initScene(); });
+        initScene(); animate();
+
         // Timer Logic
         function startTimer(duration) {
             let timer = duration, hours, minutes, seconds;
@@ -248,23 +301,18 @@
                 hours = parseInt(timer / 3600, 10);
                 minutes = parseInt((timer % 3600) / 60, 10);
                 seconds = parseInt(timer % 60, 10);
-
                 document.getElementById('h').textContent = hours < 10 ? "0" + hours : hours;
                 document.getElementById('m').textContent = minutes < 10 ? "0" + minutes : minutes;
                 document.getElementById('s').textContent = seconds < 10 ? "0" + seconds : seconds;
-
                 if (--timer < 0) timer = duration;
             }, 1000);
         }
-
-        // FAQ Toggle
         function toggleFaq(btn) {
             const content = btn.nextElementSibling;
             const isOpen = content.style.maxHeight;
             document.querySelectorAll('.faq-content').forEach(c => c.style.maxHeight = null);
             content.style.maxHeight = (isOpen && isOpen !== "0px") ? null : content.scrollHeight + "px";
         }
-
         window.onload = function () { startTimer(7200); };
     </script>
 </body>
