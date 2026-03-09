@@ -9,13 +9,13 @@
     <style>
         :root {
             --bg: #030508;
-            --surface: #0a0c10;
+            --surface: rgba(255,255,255,0.02);
             --gold: #fbbf24;
             --gold-light: #fef3c7;
             --green: #2ecc71;
             --text: #ffffff;
-            --text-dim: #9ca3af;
-            --border: #1f2937;
+            --text-dim: #d1d5db;
+            --border: rgba(255,255,255,0.08);
             --transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
@@ -32,9 +32,9 @@
         }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; }
-        h1, h2, h3 { font-family: 'Archivo', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.1; color: var(--text); }
+        h1, h2, h3 { font-family: 'Archivo', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.1; color: #ffffff; }
         .italic-serif { font-family: 'Playfair Display', serif; font-style: italic; text-transform: none; letter-spacing: 0; }
-        p { margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; color: var(--text-dim); }
 
         /* Animations */
         @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); } 70% { transform: scale(1.02); box-shadow: 0 0 0 15px rgba(46, 204, 113, 0); } 100% { transform: scale(1); } }
@@ -43,7 +43,7 @@
         /* Hero */
         .hero { padding: 140px 0 80px; text-align: center; border-bottom: 1px solid var(--border); }
         .hero span { color: var(--gold); letter-spacing: 5px; font-weight: 700; font-size: 13px; margin-bottom: 25px; display: block; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); margin-bottom: 35px; color: #ffffff; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); margin-bottom: 35px; }
         .hero p { max-width: 850px; margin: 0 auto 50px; font-size: 1.25rem; color: var(--text-dim); font-weight: 300; }
 
         /* CTA Button */
@@ -66,7 +66,7 @@
         }
         .btn-cta:hover { transform: scale(1.05); background: #27ae60; box-shadow: 0 10px 40px rgba(46, 204, 113, 0.3); }
         .btn-cta::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: shine 3s infinite; }
-        .microcopy { display: block; margin-top: 15px; font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        .microcopy { display: block; margin-top: 15px; font-size: 11px; color: #9ca3af; text-transform: uppercase; letter-spacing: 2px; }
 
         /* Downsell Button Styling */
         .btn-downsell {
@@ -74,7 +74,7 @@
             margin-top: 20px;
             font-size: 13px;
             color: var(--text);
-            opacity: 0.7;
+            opacity: 0.6;
             text-decoration: none;
             transition: var(--transition);
         }
@@ -88,37 +88,35 @@
         .card { background: var(--surface); border: 1px solid var(--border); padding: 40px; border-radius: 4px; transition: var(--transition); height: 100%; }
         .card:hover { border-color: var(--gold); transform: translateY(-5px); }
         .card h3 { font-size: 1.6rem; margin-bottom: 20px; color: var(--gold); }
-        .card p { color: var(--text-dim); }
 
         /* Offer Block */
-        .offer-wrapper { background: radial-gradient(circle at center, #0a0c10 0%, #030508 100%); padding: 100px 0; border-top: 1px solid var(--border); }
-        .offer-card { max-width: 650px; margin: 0 auto; background: #000; border: 1px solid var(--gold); border-radius: 8px; overflow: hidden; }
+        .offer-wrapper { background: #000; padding: 100px 0; border-top: 1px solid var(--border); }
+        .offer-card { max-width: 650px; margin: 0 auto; background: rgba(255,255,255,0.03); border: 1px solid var(--gold); border-radius: 8px; overflow: hidden; }
         .offer-badge { background: var(--gold); color: #000; padding: 15px; font-weight: 900; font-size: 12px; text-align: center; text-transform: uppercase; }
         .offer-content { padding: 50px 30px; text-align: center; }
 
         .bullets { list-style: none; text-align: left; margin: 40px 0; }
-        .bullets li { padding: 14px 0; border-bottom: 1px solid #111; font-size: 0.95rem; color: var(--text-dim); display: flex; align-items: center; gap: 15px; }
+        .bullets li { padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; color: var(--text-dim); display: flex; align-items: center; gap: 15px; }
         .bullets li::before { content: '✔️'; color: var(--gold); font-size: 1rem; }
 
-        .price-anchor { color: var(--text); }
-        .price-old { text-decoration: line-through; color: var(--text-dim); font-size: 1.1rem; }
+        .price-old { text-decoration: line-through; color: #9ca3af; font-size: 1.1rem; }
         .price-main { font-size: 4.5rem; font-weight: 900; color: #ffffff; line-height: 1; margin: 15px 0; letter-spacing: -2px; }
 
-        /* Accordion FAQ (Adjusted for Dark Theme) */
-        .faq { padding: 100px 0; background: #ffffff; color: #000000; }
-        .faq h2 { color: #000000; text-align: center; margin-bottom: 60px; font-size: 3rem; }
+        /* Accordion FAQ */
+        .faq { padding: 100px 0; background: #000; color: #ffffff; }
+        .faq h2 { color: #ffffff; text-align: center; margin-bottom: 60px; font-size: 3rem; }
         .faq-container { max-width: 800px; margin: 0 auto; }
-        .faq-item { border-bottom: 1px solid #eeeeee; }
+        .faq-item { border-bottom: 1px solid var(--border); }
         .faq-question {
-            width: 100%; padding: 25px 0; background: none; border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; transition: var(--transition); color: #000000;
+            width: 100%; padding: 25px 0; background: none; border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; transition: var(--transition); color: #ffffff;
         }
-        .faq-question:hover { color: #c5a47e; }
-        .faq-icon { position: relative; width: 20px; height: 20px; color: #000000; }
+        .faq-question:hover { color: var(--gold); }
+        .faq-icon { position: relative; width: 20px; height: 20px; }
         .faq-icon::before, .faq-icon::after { content: ''; position: absolute; background: currentColor; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: var(--transition); }
         .faq-icon::before { width: 100%; height: 2px; }
         .faq-icon::after { width: 2px; height: 100%; }
         .active .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0, 1, 0, 1); color: #4b5563; font-size: 0.95rem; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0, 1, 0, 1); color: var(--text-dim); font-size: 0.95rem; }
         .faq-answer p { padding-bottom: 25px; margin: 0; }
         .active + .faq-answer { max-height: 1000px; transition: max-height 0.4s ease-in-out; }
 
@@ -157,7 +155,7 @@
             <div>
                 <span class="label">THE HIDDEN PROBLEM</span>
                 <h2>Why Your Current Skincare Routine Is <span style="color:var(--gold)">Working Against You.</span></h2>
-                <p style="color: var(--text-dim); margin-top: 25px;">You're likely wasting hundreds of dollars on products that can't penetrate your skin's surface. If your body's internal clock and stress hormones are out of balance, your skin physically cannot regenerate. You're trying to build a house on a sinking foundation.</p>
+                <p style="margin-top: 25px;">You're likely wasting hundreds of dollars on products that can't penetrate your skin's surface. If your body's internal clock and stress hormones are out of balance, your skin physically cannot regenerate. You're trying to build a house on a sinking foundation.</p>
             </div>
             <div class="card">
                 <h3>The "Cortisol Trap"</h3>
@@ -166,13 +164,13 @@
         </div>
     </section>
 
-    <section class="section-padding" style="background: var(--surface);">
+    <section class="section-padding" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
         <div class="container" style="text-align:center">
             <span class="label">THE BIOLOGICAL SECRET</span>
             <h2 style="margin-bottom: 40px;">The Deep Glow Protocol™</h2>
             <div class="grid-2" style="text-align:left">
-                <p style="color: var(--text-dim);">This isn't just "skincare"—it's biological optimization. By syncing your evening routine with your body's peak Growth Hormone release, you stop fighting against your biology and start working with it.</p>
-                <p style="color: var(--text-dim);">This is the "Golden Window" for cellular turnover. Once you learn to leverage it, you can erase the signs of fatigue and premature aging, revealing smoother, tighter skin in as little as 21 days.</p>
+                <p>This isn't just "skincare"—it's biological optimization. By syncing your evening routine with your body's peak Growth Hormone release, you stop fighting against your biology and start working with it.</p>
+                <p>This is the "Golden Window" for cellular turnover. Once you learn to leverage it, you can erase the signs of fatigue and premature aging, revealing smoother, tighter skin in as little as 21 days.</p>
             </div>
             <div style="margin-top: 60px;">
                 <a href="#offer" class="btn-cta">Access The Protocol</a>
@@ -216,8 +214,8 @@
                 <div class="offer-content">
                     
                     <span class="label">GET THE FULL SYSTEM</span>
-                    <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #ffffff;">The Deep Glow Protocol</h2>
-                    <span class="price-anchor" style="display:block; margin-bottom:20px;">Stop wasting time and money on ineffective creams. Get the complete blueprint for:</span>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">The Deep Glow Protocol</h2>
+                    <span class="price-anchor" style="display:block; margin-bottom:20px; color: var(--text-dim);">Stop wasting time and money on ineffective creams. Get the complete blueprint for:</span>
 
                     <ul class="bullets">
                         <li>The Biological Nighttime Repair Blueprint</li>
@@ -246,9 +244,9 @@
     </section>
 
     <section class="section-padding container" style="text-align:center">
-        <div style="max-width: 800px; margin: 0 auto; border: 1px solid var(--border); padding: 60px; border-radius: 8px;">
+        <div style="max-width: 800px; margin: 0 auto; border: 1px solid var(--border); padding: 60px; border-radius: 8px; background: rgba(255,255,255,0.01);">
             <h2 style="color: var(--gold); margin-bottom: 25px;">The "Radiant Skin" Guarantee</h2>
-            <p style="font-size: 1.1rem; color: var(--text-dim);">Try the Deep Glow Protocol for 14 full days. If you don't wake up feeling more revitalized, or if you don't see a visible difference in your skin's texture and glow, just email us for a full refund. No questions, no hassle. I'm taking all the risk for you.</p>
+            <p style="font-size: 1.1rem;">Try the Deep Glow Protocol for 14 full days. If you don't wake up feeling more revitalized, or if you don't see a visible difference in your skin's texture and glow, just email us for a full refund. No questions, no hassle. I'm taking all the risk for you.</p>
         </div>
     </section>
 
@@ -258,7 +256,7 @@
             <div class="faq-container">
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span><span class="faq-num">01.</span> Will this work if I'm over 50?</span>
+                        <span><span class="faq-num" style="color: var(--gold)">01.</span> Will this work if I'm over 50?</span>
                         <span class="faq-icon"></span>
                     </button>
                     <div class="faq-answer">
@@ -267,7 +265,7 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span><span class="faq-num">02.</span> Do I need to buy expensive serums?</span>
+                        <span><span class="faq-num" style="color: var(--gold)">02.</span> Do I need to buy expensive serums?</span>
                         <span class="faq-icon"></span>
                     </button>
                     <div class="faq-answer">
@@ -276,7 +274,7 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span><span class="faq-num">03.</span> How long until I see a change?</span>
+                        <span><span class="faq-num" style="color: var(--gold)">03.</span> How long until I see a change?</span>
                         <span class="faq-icon"></span>
                     </button>
                     <div class="faq-answer">
@@ -285,7 +283,7 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span><span class="faq-num">04.</span> Is this methodology safe?</span>
+                        <span><span class="faq-num" style="color: var(--gold)">04.</span> Is this methodology safe?</span>
                         <span class="faq-icon"></span>
                     </button>
                     <div class="faq-answer">
@@ -294,7 +292,7 @@
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span><span class="faq-num">05.</span> How do I get access?</span>
+                        <span><span class="faq-num" style="color: var(--gold)">05.</span> How do I get access?</span>
                         <span class="faq-icon"></span>
                     </button>
                     <div class="faq-answer">
