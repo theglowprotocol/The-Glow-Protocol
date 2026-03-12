@@ -407,5 +407,34 @@ Yes. This version was specifically designed for beginners and people with busy s
 © 2026 GLOW RITUAL ESSENTIALS • THE CORE STANDARD
 </footer>
 
+  <script>
+
+function toggleFaq(button){
+
+const content = button.nextElementSibling;
+const icon = button.querySelector("span");
+
+if(content.style.maxHeight){
+content.style.maxHeight = null;
+icon.textContent = "+";
+}else{
+
+document.querySelectorAll(".faq-content").forEach(el=>{
+el.style.maxHeight = null;
+});
+
+document.querySelectorAll(".faq-trigger span").forEach(el=>{
+el.textContent = "+";
+});
+
+content.style.maxHeight = content.scrollHeight + "px";
+icon.textContent = "−";
+
+}
+
+}
+
+</script>
+  
 </body>
 </html>
