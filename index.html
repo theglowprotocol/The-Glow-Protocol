@@ -136,7 +136,7 @@
     animation: pulseAlert 2s ease-in-out infinite;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     cursor: pointer;
-    transition: transform 0.1s ease, opacity 0.2s ease;
+    transition: transform 0.3s ease, opacity 0.2s ease;
 }
 .top-alert:active {
     transform: scale(0.97);
@@ -201,7 +201,7 @@ src="https://www.facebook.com/tr?id=1629880211533904&ev=PageView&noscript=1"
 <body>
     
   <div class="top-alert" onclick="scrollToOffer()">
-    🔥 85% OFF TODAY — GET YOUR GLOW BACK IN 5 DAYS ↓
+    🔥 85% OFF TODAY — GET YOUR GLOW BACK IN 5 DAYS
 </div>
     
     <canvas id="dropletCanvas"></canvas>
@@ -461,6 +461,21 @@ src="https://www.facebook.com/tr?id=1629880211533904&ev=PageView&noscript=1"
             content.style.maxHeight = (isOpen && isOpen !== "0px") ? null : content.scrollHeight + "px";
         }
         window.onload = function () { startTimer(7200); };
+        let lastScrollTop = 0;
+
+window.addEventListener('load', function () {
+    const alertBar = document.querySelector('.top-alert');
+
+    window.addEventListener('scroll', function () {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > 100) {
+            alertBar.style.transform = "translateY(-100%)";
+        } else {
+            alertBar.style.transform = "translateY(0)";
+        }
+    });
+});
     </script>
 </body>
 </html>
